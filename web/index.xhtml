@@ -3,21 +3,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    
-    <h:form enctype="multipart/form-data">
-        <p:fileUpload label="Selecionar" uploadLabel="Upload" cancelLabel="Cancelar" value="#{uploadMB.file}" 
-                      mode="advanced" sizeLimit="102400" fileLimit="1"
-                      fileUploadListener="#{uploadMB.handleFileUpload(event)}" auto="false" style="width:500px"
-                      skinSimple="true" allowTypes="/(\.|\/)(doc|docx|txt)$/"
-                      invalidSizeMessage="Tamanho do arquivo excedido"
-                      invalidFileMessage="Tipo de arquivo não suportado"
-                      fileLimitMessage="Limite de arquivos excedido"
-                      />
- 
-        <p:growl id="messages" showDetail="true" />
-    </h:form>
-    <br/>
-    <br/>
-    <p:inputTextarea rows="20" cols="189" value="#{uploadMB.teste()}"/>
+    <h:body>
+        <h:form enctype="multipart/form-data">
+            <link rel="stylesheet" type="text/css" href="#{request.contextPath}/private/resources/css/style.css"/>
+            <p:fileUpload class="upload" value="#{uploadMB.file}" mode="simple" skinSimple="false"
+                          label="" update="messages" sizeLimit="102400" fileLimit="1" 
+                          allowTypes="/(\.|\/)(doc|docx|txt)$/"
+                          invalidSizeMessage="Tamanho do arquivo excedido"
+                          invalidFileMessage="Tipo de arquivo não suportado"
+                          fileLimitMessage="Limite de arquivos excedido"
+                          />
+            <p:commandButton value="Upload" ajax="false" action="#{uploadMB.upload()}"/>
+
+            <p:growl id="messages" showDetail="true" />
+        </h:form>
+        <br/>
+        <br/>
+        <b><label>Dados do arquivo</label></b>
+        <br/>
+        <p:inputTextarea rows="20" cols="189" value="#{uploadMB.teste()}"/> 
+    </h:body>
 </html>
 
